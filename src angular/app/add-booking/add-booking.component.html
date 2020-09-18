@@ -1,0 +1,36 @@
+<section class="col-md-4 mx-auto">
+    <h2 class="text-center" *ngIf="addBookingFlag">Add Booking</h2>
+   
+   <div class="alert alert-success" *ngIf="msg != undefined">{{msg}}</div>
+    <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+  
+  
+  <form #frm="ngForm" (ngSubmit)="addBooking()">
+    <div>Show ID</div>
+    <div><input type="number" name="sid" [(ngModel)]="bookingForm.showId" required #modelsid="ngModel" class="form-control"></div>
+    <div class="alert alert-danger" *ngIf="modelsid.invalid && modelsid.touched">Show ID is required</div>
+  
+    <div>No. of tickets</div>
+    <div><input type="number" name="tkts" [(ngModel)]="bookingForm.noOfTkts" required pattern='[1-9]' #modeltkts="ngModel" class="form-control"></div>
+    <div class="alert alert-danger" *ngIf="modeltkts.invalid && modeltkts.touched">Ticket is required
+      <div *ngIf='modeltkts.errors.pattern'>Ticket must be greater than 0</div>
+    </div>
+  
+    <div>UserName</div>
+    <div><input type="text" name="uname" [(ngModel)]="bookingForm.userName" required pattern='([a-zA-Z]+)|([a-zA-Z]+[\\s][a-zA-Z]+)' #mluname="ngModel" class="form-control"/></div>
+    <div class="alert alert-danger" *ngIf="mluname.invalid && mluname.touched">User Name is required
+      <div *ngIf='mluname.errors.pattern'>Name must be string with first and last name</div>
+    </div>
+  
+    <div>Contact</div>
+    <div><input type="number" name="con" [(ngModel)]="bookingForm.contact" required pattern='[0-9]{10}' #mlcon="ngModel" class="form-control"/></div>
+    <div class="alert alert-danger" *ngIf="mlcon.invalid && mlcon.touched">Contact is required
+        <div *ngIf='mlcon.errors.pattern'>Contact no. must be 10 digits</div>
+    </div>
+
+    <div class="mt-2 text-center"><input type="submit" value="Add Booking" [disabled]="!frm.valid" class="btn btn-danger"/>
+    </div>
+    
+  </form>
+  </section>
+ 

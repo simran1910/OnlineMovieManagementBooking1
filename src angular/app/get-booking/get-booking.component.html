@@ -1,0 +1,22 @@
+ <h2 class="text-center">Booking List</h2>
+<div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+<div class="col-4 mx-auto m-5">Search By Contact
+  <input type="text" name="txtsearch" [(ngModel)]="contact" class="form-control"/>
+  <input type="button" value='View Bookings' (click)="getByContact()"/>
+</div>
+<table class="table table-primary table-striped col-4 table-hover mx-auto">
+   <tr>
+    <td> Booking Id</td>
+    <td> Booking Date</td>
+    <td> Username</td>
+    <td> Contact</td>
+    <td> Total Cost</td>
+  </tr>
+  <tr *ngFor="let b of bookings">
+      <td>{{b.bookingId}}</td>
+      <td>{{b.bookingDate}}</td>
+      <td>{{b.userName | titlecase}}</td>
+      <td>{{b.contact}}</td>
+      <td>{{b.totalCost | currency: 'INR'}}</td>
+  </tr>
+</table> 
